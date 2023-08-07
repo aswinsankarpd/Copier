@@ -30,9 +30,6 @@ void copy_directory(const char* source_dir, const char* dest_dir) {
         return;
     }
 
-    // Create destination directory if it doesn't exist
-    // mkdir(dest_dir, 0777);
-
     while ((entry = readdir(dir)) != NULL) {
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
             continue;
