@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
+
 
 struct data{
     char command[100];
@@ -18,3 +21,7 @@ void commandparser(struct data new);
 void copy_handler(const char* source_dir, const char* dest_dir, char* recursive);
 void copy_file(const char* source_path, const char* destination_path);
 void copy_directory(const char* source_dir, const char* dest_dir);
+void moveFile(const char *srcPath, const char *destPath);
+void moveFilesRecursively(const char *srcDir, const char *destDir);
+void copyFile(const char *, const char *);
+void copyFilesWithExtension(const char *, const char *, const char *);
