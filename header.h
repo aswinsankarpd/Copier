@@ -15,5 +15,6 @@ void lscommand();
 void printcwd();
 struct data substring(char *source_string);
 void commandparser(struct data new);
+void copy_handler(const char* source_dir, const char* dest_dir, char* recursive);
 void copy_file(const char* source_path, const char* destination_path);
 void copy_directory(const char* source_dir, const char* dest_dir);

@@ -3,18 +3,20 @@
 char command[100];
 static char src[100];
 static char dest[100];
-
+static char thesource[100];
+static char thedest[100];
 void commandparser(struct data new){
 
     strcpy(command,new.command);
-    // printf("%s %s %s",command,src,dest);
 
     if (strcmp(command,"source") == 0){
         strcpy(src,new.src);
+        strcpy(thesource,new.src);
     }
 
     if (strcmp(command,"dest") == 0){
         strcpy(dest,new.src);
+        strcpy(thedest,new.src);
     }
 
     if (strcmp(command,"ls") == 0){
@@ -26,8 +28,11 @@ void commandparser(struct data new){
     }
 
     if (strcmp(command,"copy") == 0){
-        copy_directory(src,dest);
+        if (strcpy(new.src,"-R"))
+            copy_handler(thesource,thedest,new.src);
+        else
+            copy_handler(thesource,thedest," ");
     }
 
-    printf("%s %s %s", command,src,dest);
+    printf("%s %s %s ", command,src,dest);
 }

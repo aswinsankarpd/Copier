@@ -1,5 +1,14 @@
 #include "header.h"
 
+void copy_handler(const char* source_dir, const char* dest_dir, char* recursive){
+    printf("%s",recursive);
+    if (strcmp(recursive,"-R") == 0){
+        copy_directory(source_dir,dest_dir);
+    }
+    else{
+        copy_file(source_dir,dest_dir);
+    }
+}
 
 void copy_file(const char* source_path, const char* destination_path) {
     FILE* source_file = fopen(source_path, "rb");
@@ -12,8 +21,6 @@ void copy_file(const char* source_path, const char* destination_path) {
         }
         fclose(source_file);
         fclose(destination_file);
-    } else {
-        printf("Error opening file!\n");
     }
 }
 
@@ -24,25 +31,24 @@ void copy_directory(const char* source_dir, const char* dest_dir) {
     char dest_path[100];
 
     dir = opendir(source_dir);
-    printf("sjdfhksdjf %s",source_dir);
     if (dir == NULL) {
         printf("Error opening directory!\n");
         return;
     }
+
+    _mkdir(dest_dir);
 
     while ((entry = readdir(dir)) != NULL) {
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
             continue;
         }
 
-        snprintf(source_path, 100, "%s/%s", source_dir, entry->d_name);
-        snprintf(dest_path, 100, "%s/%s", dest_dir, entry->d_name);
+        snprintf(source_path, sizeof(source_path), "%s/%s", source_dir, entry->d_name);
+        snprintf(dest_path, sizeof(dest_path), "%s/%s", dest_dir, entry->d_name);
 
         if (entry->d_type == DT_REG) {
-            // If it's a regular file, copy it
             copy_file(source_path, dest_path);
         } else if (entry->d_type == DT_DIR) {
-            // If it's a subdirectory, recursively copy its contents
             copy_directory(source_path, dest_path);
         }
     }
