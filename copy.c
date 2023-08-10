@@ -1,5 +1,7 @@
 #include "header.h"
 
+
+// to decide upon the type of copy
 void copy_handler(const char* source_dir, const char* dest_dir, char* recursive){
     printf("%s",recursive);
     if (strcmp(recursive,"-R") == 0){
@@ -10,6 +12,7 @@ void copy_handler(const char* source_dir, const char* dest_dir, char* recursive)
     }
 }
 
+//to copy file normally
 void copy_file(const char* source_path, const char* destination_path) {
     FILE* source_file = fopen(source_path, "rb");
     FILE* destination_file = fopen(destination_path, "wb");
@@ -24,6 +27,8 @@ void copy_file(const char* source_path, const char* destination_path) {
     }
 }
 
+
+// to copy entire subdirectory and files recursively
 void copy_directory(const char* source_dir, const char* dest_dir) {
     DIR* dir;
     struct dirent* entry;

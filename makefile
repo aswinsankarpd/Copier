@@ -4,7 +4,7 @@ CFLAGS := -Wall -Wextra
 SRCDIR := .
 BINDIR := .
 
-EXECUTABLE := myprogram
+EXECUTABLE := Copier
 
 SOURCES := $(wildcard $(SRCDIR)/*.c)
 OBJS := $(patsubst $(SRCDIR)/%.c, $(BINDIR)/%.o, $(SOURCES))

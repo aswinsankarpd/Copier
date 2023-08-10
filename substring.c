@@ -1,5 +1,7 @@
 #include "header.h"
 
+
+// reading input arguments differently and storing them in the variables
 struct data substring(char *source_string){
    
     struct data new;

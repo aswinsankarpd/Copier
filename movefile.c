@@ -1,17 +1,19 @@
 #include "header.h"
 
+//move files normally
 void moveFile(const char *srcPath, const char *destPath) {
     if (rename(srcPath, destPath) != 0) {
         perror("Error moving file");
     }
 }
 
+//recursive copying by repearting normal copying
 void moveFilesRecursively(const char *srcDir, const char *destDir) {
     struct dirent *entry;
     DIR *dir = opendir(srcDir);
 
     if (dir == NULL) {
-        perror("Error opening source directory");
+        perror("Error opening directory");
         return;
     }
 
@@ -30,7 +32,7 @@ void moveFilesRecursively(const char *srcDir, const char *destDir) {
             if (S_ISREG(st.st_mode)) {
                 moveFile(srcPath, destPath);
             } else if (S_ISDIR(st.st_mode)) {
-                mkdir(destPath);  // Create destination directory
+                mkdir(destPath);  // Create destination directory if not exists
                 moveFilesRecursively(srcPath, destPath);
                 rmdir(srcPath);
             }

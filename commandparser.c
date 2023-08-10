@@ -1,10 +1,14 @@
 #include "header.h"
 
+
+// Initialising variables to store command and file destinantions
 char command[100];
 static char src[100];
 static char dest[100];
 static char thesource[100];
 static char thedest[100];
+
+// command parser fucntion to call the designated functions according to the command.
 void commandparser(struct data new){
 
     strcpy(command,new.command);
@@ -27,16 +31,11 @@ void commandparser(struct data new){
         lscommand(dest);
     }
 
-    if ((strcmp(command,"copy") == 0) && (strcmp(new.dest,"*.c") == 0)){
-        copyFilesWithExtension(thesource,thedest,"*.c");
-    }
-
-    if (strcmp(command,"copy") == 0){
-        if (strcmp(new.src,"-R") == 0)
+    if ((strcmp(command,"copy") == 0) && (strcmp(new.src,"-R") == 0))
             copy_handler(thesource,thedest,new.src);
         else
-            copy_handler(thesource,thedest," ");
-    }
+            copy_file(thesource,thedest);
+    
 
 
     if (strcmp(command,"move") == 0){

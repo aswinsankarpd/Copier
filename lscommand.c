@@ -1,5 +1,7 @@
 #include "header.h"
 
+
+// to print contents of the current sub directory.
 void lscommand(char *src){
     DIR *dir;
     struct dirent *entry;
